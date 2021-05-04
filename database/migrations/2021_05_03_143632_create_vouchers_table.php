@@ -15,7 +15,15 @@ class CreateVouchersTable extends Migration
     {
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
+            $table->integer('number');
+            $table->string('type');
+            $table->double('amount', 8, 2);
+            $table->string('relatedPerson');//who gets the money
+            $table->text('statment')->nullable();
+            $table->enum('paymentType', ['CARD', 'CASH']);
+            $table->timestamp('date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

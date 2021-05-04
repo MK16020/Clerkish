@@ -15,7 +15,12 @@ class CreateDailyJournalsTable extends Migration
     {
         Schema::create('daily_journals', function (Blueprint $table) {
             $table->id();
+            $table->integer('number');
+            $table->text('statment')->nullable();
+            $table->string('type');
+            $table->timestamp('date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

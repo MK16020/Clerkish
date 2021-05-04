@@ -18,9 +18,11 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('role');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -34,47 +36,3 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
     }
 }
-/*
-User
-————————
-Id
-name
-email
-role
-password
-Accounts
-—————-
-id
-accountCode
-name
-type [payable, receivable, ..]
-main?
-Lock?
-parentID
-lastChildID
-
-Voucher
-—————
-id
-number
-type
-amount
-relatedPerson
-statment
-paymentType
-date
-
-Daily Journal
-—————————
-id
-number
-statment
-date
-type
-Accounts Journal
-———————————
-accountID
-journalID
-amount
-statment
-*/

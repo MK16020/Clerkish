@@ -14,8 +14,23 @@ class CreateAccountsJournalsTable extends Migration
     public function up()
     {
         Schema::create('accounts_journals', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('accountID');
+            $table->unsignedBigInteger('journalID');
+            $table->double('amount', 8, 2);
+            $table->text('statment')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->primary(['accountID', 'journalID']);
+
+            $table->foreign('accountID')
+                ->references('id')->on('accounts')
+                ->onDelete('cascade');
+
+            $table->foreign('journalID')
+                ->references('id')->on('daily_journals')
+                ->onDelete('cascade');
+            
         });
     }
 
