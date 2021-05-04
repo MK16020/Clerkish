@@ -2,19 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class AccountsJournal extends Model
 {
-    use SoftDeletes;
-    public function items()
+    public function accounts()
     {
-        return $this->hasMany(Item::class, 'itemID');
+        return $this->hasMany(Account::class, 'accountID');
     }
 
-    public function restores()
+    public function journals()
     {
-        return $this->hasMany(Restore::class, 'restoreID');
+        return $this->hasMany(DailyJournal::class, 'journalID');
     }
 }
