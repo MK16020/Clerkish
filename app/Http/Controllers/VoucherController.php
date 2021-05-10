@@ -8,32 +8,6 @@ class VoucherController extends Controller
 {
     public function index()
     {
-        //
-    }
-
-    public function insert(Request $request)
-    {
-        //
-    }
-
-    public function update(Request $request)
-    {
-        //
-    }
-
-    public function show($ID)
-    {
-        //
-    }
-
-    public function delete($ID)
-    {
-        //
-    }
-}
-/*
-public function index()
-    {
         $voucher = Voucher::all();
 
         return parent::getResopnse(
@@ -182,19 +156,19 @@ public function index()
     public function updateCache(Request $request)
     {
         if (!$request->date) {
-            $companies = Voucher::all();
+            $vouchers = Voucher::all();
         } else {
-            $companies = Voucher::withTrashed()
+            $vouchers = Voucher::withTrashed()
                 ->where('created_at', '>=', $request->date)
                 ->orWhere('updated_at', '>=', $request->date)
                 ->orWhere('deleted_at', '>=', $request->date)->get();
         }
 
-        $companies = GeneralCacheResource::collection($companies);
+        $vouchers = GeneralCacheResource::collection($vouchers);
 
         return parent::getResponseWithOutMessage(
             200,
-            $companies
+            $vouchers
         );
     }
- */
+}

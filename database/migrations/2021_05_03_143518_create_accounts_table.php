@@ -17,7 +17,7 @@ class CreateAccountsTable extends Migration
             $table->id();
             $table->string('accountCode');
             $table->string('name');
-            $table->enum('type', ['PAYABLE', 'RECEIVABLE', ' ']);
+            $table->enum('type', ['PAYABLE', 'RECEIVABLE', ' EXPENSE']);
             $table->boolean('locked')->default(false);
             $table->boolean('main');
             $table->foreignId('parentID')->nullable();
