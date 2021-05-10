@@ -28,9 +28,23 @@ class Account extends Model
         return $this->belongsTo(Account::class, 'parentID');
     }
 
+    public function childAccount()
+    {
+        return $this->belongsTo(Account::class, 'childID');
+    }
+
     public function lastChild()
     {
         return $this->hasMany(Account::class, 'lastChildID');
     }
 
+    public function journal()
+    {
+        return $this->hasMany(DailyJournal::class, 'journalID');
+    }
+/*
+* journals.
+* childAccount
+* parentAccount
+ */
 }

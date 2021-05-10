@@ -18,5 +18,8 @@ class DailyJournal extends Model
         'updated_at',
         'deleted_at'
     ];
-
+    public function accounts()
+    {
+        return $this->hasMany(Account::class, 'accountID');
+    }
 }

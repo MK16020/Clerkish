@@ -12,7 +12,7 @@ class DailyJournalController extends Controller
         $journal = Journal::all();
 
         return parent::getPaginatedResopnse(
-            __('journalMessages.index'),
+            __('dailyJournalMessages.index'),
             $journal
         );
     }
@@ -38,14 +38,14 @@ class DailyJournalController extends Controller
 
         if (!$journal->save()) {
             return parent::getResponse(
-                __('journalMessages.notInserted', ['name' => $request->name]),
+                __('dailyJournalMessages.notInserted', ['name' => $request->name]),
                 304,
                 $journal
             );
         }
 
         return parent::getResponse(
-            __('journalMessages.inserted', ['name' => $journal->name]),
+            __('dailyJournalMessages.inserted', ['name' => $journal->name]),
             201,
             $journal
         );
@@ -71,7 +71,7 @@ class DailyJournalController extends Controller
 
         if (!$journal) {
             return parent::getResponse(
-                __('journalMessages.notFound'),
+                __('dailyJournalMessages.notFound'),
                 404
             );
         }
@@ -90,21 +90,21 @@ class DailyJournalController extends Controller
 
         if (!$isDirty) {
             return parent::getResponse(
-                __('journalMessages.noUpdates'),
+                __('dailyJournalMessages.noUpdates'),
                 200
             );
         }
 
         if (!$journal->save()) {
             return parent::getResponse(
-                __('journalMessages.notUpdated', ['name' => $request->name]),
+                __('dailyJournalMessages.notUpdated', ['name' => $request->name]),
                 304,
                 $journal
             );
         }
 
         return parent::getResponse(
-            __('journalMessages.updated', ['name' => $journal->name]),
+            __('dailyJournalMessages.updated', ['name' => $journal->name]),
             200,
             $journal
         );
@@ -116,14 +116,14 @@ class DailyJournalController extends Controller
 
         if (!$journal) {
             return parent::getResponse(
-                __('journalMessages.notFound'),
+                __('dailyJournalMessages.notFound'),
                 404
             );
         }
         $journal = ViewjournalResource::collection([$journal]);
 
         return parent::getResponse(
-            __('journalMessages.show'),
+            __('dailyJournalMessages.show'),
             200,
             $journal[0]
         );
@@ -135,20 +135,20 @@ class DailyJournalController extends Controller
 
         if (!$journal) {
             return parent::getResponse(
-                __('journalMessages.notFound'),
+                __('dailyJournalMessages.notFound'),
                 404
             );
         }
 
         if (!$journal->delete()) {
             return parent::getResponse(
-                __('journalMessages.notDeleted'),
+                __('dailyJournalMessages.notDeleted'),
                 304
             );
         }
 
         return parent::getResponse(
-            __('journalMessages.deleted'),
+            __('dailyJournalMessages.deleted'),
             200
         );
     }

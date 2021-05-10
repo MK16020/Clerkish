@@ -17,7 +17,7 @@ class CreateDailyJournalsTable extends Migration
             $table->id();
             $table->integer('number');
             $table->text('statment')->nullable();
-            $table->string('type');
+            $table->enum('type',['']);
             $table->timestamp('date');
             $table->timestamps();
             $table->softDeletes();

@@ -15,21 +15,18 @@ class CreateAccountsTable extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->integer('accountCode');
+            $table->string('accountCode');
             $table->string('name');
             $table->enum('type', ['PAYABLE', 'RECEIVABLE', ' ']);
             $table->boolean('locked')->default(false);
             $table->boolean('main');
             $table->foreignId('parentID')->nullable();
-            $table->foreignId('lastChildID')->nullable();
+            $table->nextChildCode('lastChildID')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
             Schema::table('accounts', function (Blueprint $table) {
                 $table->foreign('parentID')
-                ->references('id')->on('accounts')
-                ->onDelete('cascade');
-                $table->foreign('lastChildID')
                 ->references('id')->on('accounts')
                 ->onDelete('cascade');
             });

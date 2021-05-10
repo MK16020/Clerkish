@@ -11,7 +11,7 @@ class AccountController extends Controller
     {
         $account = Account::all();
 
-        return parent::getPaginatedResopnse(
+        return parent::getResopnse(
             __('accountMessages.index'),
             $account
         );
