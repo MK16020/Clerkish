@@ -127,16 +127,15 @@ class DailyJournalController extends Controller
 
         if (!$journal) {
             return parent::getResponse(
-                __('dailyJournalMessages.notFound'),
+                __('journalMessages.notFound'),
                 404
             );
         }
-        $journal = ViewjournalResource::collection([$journal]);
 
         return parent::getResponse(
-            __('dailyJournalMessages.show'),
+            __('journalMessages.show'),
             200,
-            $journal[0]
+            $journal
         );
     }
 

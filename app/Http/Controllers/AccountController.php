@@ -20,7 +20,7 @@ class AccountController extends Controller
     public function insert(Request $request)
     { 
         $request->validate([
-            'accountCode' => 'required|numeric',
+            'accountCode' => 'required',
             'name' => 'required',
             'type' => 'required',
             'main' => 'required',
@@ -35,7 +35,10 @@ class AccountController extends Controller
 
         $account = new account;
 
-        $account->name_j = $request->name;
+        $account->accountCode = $request->accountCode;
+        $account->name = $request->name;
+        $account->type = $request->type;
+        $account->main = $request->main;
 
         if (!$account->save()) {
             return parent::getResponse(
@@ -82,10 +85,10 @@ class AccountController extends Controller
 
         foreach ($request->name as $key => $localName) {
             if (
-                !$account->name_j->offsetExists($key) ||
-                $localName != $account->name_j[$key]
+                !$account->name->offsetExists($key) ||
+                $localName != $account->name[$key]
             ) {
-                $account->name_j[$key] = $localName;
+                $account->name[$key] = $localName;
                 $isDirty = true;
             }
         }
@@ -122,12 +125,11 @@ class AccountController extends Controller
                 404
             );
         }
-        $account = ViewaccountResource::collection([$account]);
 
         return parent::getResponse(
             __('accountMessages.show'),
             200,
-            $account[0]
+            $account
         );
     }
 

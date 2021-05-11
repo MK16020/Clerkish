@@ -12,30 +12,59 @@ class UserController extends Controller
     {
         $users = User::all();
         return parent::getResopnse(
-            __('voucherMessages.index'),
-            $voucher
+            __('userMessages.index'),
+            $user
         );
     }
 
-    public function show($userID) // return specific record
+    public function update(Request $request) //update specific record
+    {
+        $user = User::find($request->userID);
+
+        if (!$user) {
+            return parent::getResopnse(
+                __('userMessages.index'),
+               404);
+        }
+
+        $user->userName = $request->userName;
+        $user->email = $request->email;
+        $user->userSateID = $request->userSateID;
+        $user->userSateID = $request->userSateID;
+
+        if (!$user->isDirty()) {
+            return parent::getResponse(
+                __('userMessages.noUpdates'),
+                 200);
+        }
+
+        $user->udpatedBy = auth()->user()->id;
+
+        if (!$user->save()) {
+           return parent::getResponse(
+                __('accountMessages.cannotUpdate'),, 304);
+        }
+
+        return response()->json($user, 200);
+    }
+
+
+    public function show($userID)
     {
         $user = User::find($userID);
 
         if (!$user) {
-            return response()->json(['massage' => 'user not found'], 404);
+            return parent::getResponse(
+                __('userMessages.notFound'),
+                404
+            );
         }
-        $user = UserResources::collection($user);
-        return response()->json($user, 200);
-    }
 
-    public function update(Request $request)
-    {
-        //
-    }
-
-    public function show($ID)
-    {
-        //
+        return parent::getResponse(
+            __('userMessages.show'),
+            200,
+            $user
+        );
     }
 
     public function delete($ID)
@@ -46,6 +75,38 @@ class UserController extends Controller
 /*
 
     
+   public function update(Request $request)
+    {
+        $request->validate([
+            'userID' => 'required',
+            'name' => 'required',
+            'phone' => 'required',
+            'role' => [
+                'required',
+                Rule::in(['admin', 'ADMIN', 'supervisor', 'SUPERVISOR', 'CASHIER', 'cashier']),
+            ],
+            'branchID' => 'required'
+        ]);
+
+        $user = User::find($request->userID);
+
+        if (!$user) {
+            return parent::getResponse(
+                __('userMessages.notFound'),
+                404
+            );
+        }
+
+        if ($user->phone != $request->phone) {
+            $isPhoneTaken = User::where('phone', $request->phone)->count();
+
+            if ($isPhoneTaken) {
+                return parent::getResponse(
+                    __('userMessages.phoneIsUsed'),
+                    405
+                );
+            }
+        }
 
    
 
