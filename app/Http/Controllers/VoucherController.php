@@ -17,11 +17,13 @@ class VoucherController extends Controller
     }
 
     public function insert(Request $request)
-    { 
+    {
         $request->validate([
             'number' => 'required',
             'type' => 'required',
             'date' => 'required',
+            'amount' => 'required',
+            'relatedPerson' => 'required',
         ]);
 
         if (!array_key_exists(env('FALLBACK_LOCALE'), $request->name)) {
@@ -57,6 +59,8 @@ class VoucherController extends Controller
             'number' => 'required',
             'type' => 'required',
             'date' => 'required',
+            'amount' => 'required',
+            'relatedPerson' => 'required',
         ]);
 
         if (!array_key_exists(env('FALLBACK_LOCALE'), $request->name)) {

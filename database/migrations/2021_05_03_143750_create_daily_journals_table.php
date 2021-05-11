@@ -17,7 +17,7 @@ class CreateDailyJournalsTable extends Migration
             $table->id();
             $table->integer('number');
             $table->text('statment')->nullable();
-            $table->enum('type',['PURCHASE','SALES'.'CASH RECEIPT','CASH PAYMENT','CASH DISBURSEMENT', 'PURCHASE RETURN','SALES RETURN','GENERAL']);
+            $table->enum('type',['PURCHASE','SALES','CASH RECEIPT','CASH PAYMENT','CASH DISBURSEMENT', 'PURCHASE RETURN','SALES RETURN','GENERAL']);
             $table->timestamp('date');
             $table->timestamps();
             $table->softDeletes();

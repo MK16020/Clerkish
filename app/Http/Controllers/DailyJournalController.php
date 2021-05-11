@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\DailyJournal;
 
 class DailyJournalController extends Controller
 {
@@ -21,7 +22,13 @@ class DailyJournalController extends Controller
     { 
         $request->validate([
             'number' => 'required',
-            'type' => 'required',
+            'type' => [
+                'required',
+                Rule::in(['PURCHASE','purchase','SALES','sales','CASH RECEIPT',
+                'cash receipt','CASH PAYMENT','cash payment','CASH DISBURSEMENT',
+                 'cash dibursement','PURCHASE RETURN','purchase return','SALES RETURN',
+                 'sale return','GENERAL','general']),
+                ],
             'date' => 'required',
         ]);
 
@@ -34,7 +41,11 @@ class DailyJournalController extends Controller
 
         $journal = new journal;
 
-        $journal->name_j = $request->name;
+        $journal->name = $request->name;
+        $journal->number = $request->number;
+        $journal->type = $request->type;
+        $journal->date = $request->date;
+        $journal->statment = $request->statment;
 
         if (!$journal->save()) {
             return parent::getResponse(

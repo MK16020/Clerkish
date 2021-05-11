@@ -56,9 +56,9 @@ class AccountController extends Controller
     {
         $request->validate([
             'accountID' => 'required',
-            'accountCode' => 'required|numeric',
+            'accountCode' => 'required',
             'name' => 'required',
-            'type' => 'required',
+            'type' => 'required|array',
             'main' => 'required',
         ]);
 
