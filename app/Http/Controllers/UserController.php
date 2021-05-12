@@ -22,7 +22,10 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'role' => 'required',
+            'role' => [
+                'required',
+                Rule::in(['ADMIN','admin','ACCOUNTENT','accountent','MEMBER','member']),
+            ],
             'password' => 'required'
         ]);
 

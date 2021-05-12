@@ -101,7 +101,7 @@ class DailyJournalController extends Controller
 
         if (!$isDirty) {
             return parent::getResponse(
-                __('dailyJournalMessages.noUpdates'),
+                __('dailyJournalMessages.noUpdates', ['name' => $journal->name]),
                 200
             );
         }
@@ -152,7 +152,7 @@ class DailyJournalController extends Controller
 
         if (!$journal->delete()) {
             return parent::getResponse(
-                __('dailyJournalMessages.notDeleted'),
+                __('dailyJournalMessages.notDeleted', ['name' => $journal->name]),
                 304
             );
         }

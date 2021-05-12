@@ -22,7 +22,10 @@ class AccountController extends Controller
         $request->validate([
             'accountCode' => 'required',
             'name' => 'required',
-            'type' => 'required',
+            'type' =>=> [
+                'required',
+                Rule::in(['PAYABLE','payable', 'RECEIVABLE', ' EXPENSE']),
+            ],
             'main' => 'required',
         ]);
 
@@ -95,7 +98,7 @@ class AccountController extends Controller
 
         if (!$isDirty) {
             return parent::getResponse(
-                __('accountMessages.noUpdates'),
+                __('accountMessages.noUpdates', ['name' => $account->name]),
                 200
             );
         }
@@ -146,7 +149,7 @@ class AccountController extends Controller
 
         if (!$account->delete()) {
             return parent::getResponse(
-                __('accountMessages.notDeleted'),
+                __('accountMessages.notDeleted', ['name' => $account->name]),
                 304
             );
         }
