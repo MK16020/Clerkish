@@ -91,17 +91,17 @@ class DailyJournalController extends Controller
 
         foreach ($request->name as $key => $localName) {
             if (
-                !$journal->name_j->offsetExists($key) ||
-                $localName != $journal->name_j[$key]
+                !$journal->name->offsetExists($key) ||
+                $localName != $journal->name[$key]
             ) {
-                $journal->name_j[$key] = $localName;
+                $journal->name[$key] = $localName;
                 $isDirty = true;
             }
         }
 
         if (!$isDirty) {
             return parent::getResponse(
-                __('dailyJournalMessages.noUpdates', ['name' => $journal->name]),
+                __('dailyJournalMessages.noUpdates', ['name' => $request->name]),
                 200
             );
         }
