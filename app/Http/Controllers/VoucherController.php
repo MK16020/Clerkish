@@ -93,7 +93,7 @@ class VoucherController extends Controller
 
         if (!$isDirty) {
             return parent::getResponse(
-                __('voucherMessages.noUpdates'),
+                __('voucherMessages.noUpdates', ['name' => $voucher->name]),
                 200
             );
         }
@@ -145,7 +145,7 @@ class VoucherController extends Controller
 
         if (!$voucher->delete()) {
             return parent::getResponse(
-                __('voucherMessages.notDeleted'),
+                __('voucherMessages.notDeleted', ['name' => $voucher->name]),
                 304
             );
         }
