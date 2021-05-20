@@ -15,27 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
-require_once 'ModelAPI/AccountAPIs.php';
-require_once 'ModelAPI/AccountJournalAPIs.php';
-require_once 'ModelAPI/DailyJournalAPIs.php';
-require_once 'ModelAPI/UserAPIs.php';
-require_once 'ModelAPI/VoucherAPIs.php';
+require_once 'ModelsApi/AccountAPIs.php';
+require_once 'ModelsApi/AccountJournalAPIs.php';
+require_once 'ModelsApi/DailyJournalAPIs.php';
+require_once 'ModelsApi/UserAPIs.php';
+require_once 'ModelsApi/VoucherAPIs.php';
 
 Route::get('state', function () {
     return 'active';
 })->withoutMiddleware(['ActiveUser']);
-
-Route::get('test', function () {
-    $year = Carbon::now()->format('H:m:s');
-
-    return $local = env('FALLBACK_LOCALE');
-
-})->withoutMiddleware(['ActiveUser']);
-
-Route::group(['prefix' => 'communications'], function () {
-    Route::delete('delete/{communicaionID}', [Controller::class, 'removeConnection']);
-});

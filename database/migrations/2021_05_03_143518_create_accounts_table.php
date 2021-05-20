@@ -21,7 +21,7 @@ class CreateAccountsTable extends Migration
             $table->boolean('locked')->default(false);
             $table->boolean('main');
             $table->foreignId('parentID')->nullable();
-            $table->nextChildCode('lastChildID')->nullable();
+            $table->string('nextChildID')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

@@ -20,8 +20,8 @@ class CreateVouchersTable extends Migration
             $table->double('amount', 8, 2);
             $table->string('relatedPerson');//who gets the money
             $table->text('statment')->nullable();
-            $table->enum('paymentType', ['CARD', 'RECEIPT']);
-            $table->timestamp('date');
+            $table->enum('paymentType', ['CARD', 'CASH','TRASPARE','CHECK']);//CHECK
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
         });

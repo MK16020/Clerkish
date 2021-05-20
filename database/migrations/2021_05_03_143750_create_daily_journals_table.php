@@ -16,9 +16,9 @@ class CreateDailyJournalsTable extends Migration
         Schema::create('daily_journals', function (Blueprint $table) {
             $table->id();
             $table->integer('number');
-            $table->text('statment')->nullable();
+            $table->text('statment')->nullable();//قيد افتتاحي وتسوية ويومية 
             $table->enum('type',['PURCHASE','SALES','CASH RECEIPT','CASH PAYMENT','CASH DISBURSEMENT', 'PURCHASE RETURN','SALES RETURN','GENERAL']);
-            $table->timestamp('date');
+            $table->date('date');
             $table->timestamps();
             $table->softDeletes();
         });

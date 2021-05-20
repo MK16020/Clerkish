@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Sanctum\Sanctum;
 
 class Account extends Model
 {
@@ -28,23 +29,19 @@ class Account extends Model
         return $this->belongsTo(Account::class, 'parentID');
     }
 
-    public function childAccount()
+    public function childAccounts()
     {
-        return $this->belongsTo(Account::class, 'childID');
+        return $this->hasMany(Account::class, 'parentID');
     }
 
-    public function lastChild()
+    public function journals()
     {
-        return $this->hasMany(Account::class, 'lastChildID');
+        return $this->BelongsToMany(
+            DailyJournal::class,
+            'accounts_journals',
+            'accountID',
+            'journalID'
+        )->withPivot(['credit','debit','statment']);
     }
 
-    public function journal()
-    {
-        return $this->hasMany(DailyJournal::class, 'journalID');
-    }
-/*
-* journals.
-* childAccount
-* parentAccount
- */
 }

@@ -16,10 +16,9 @@ class CreateAccountsJournalsTable extends Migration
         Schema::create('accounts_journals', function (Blueprint $table) {
             $table->unsignedBigInteger('accountID');
             $table->unsignedBigInteger('journalID');
-            $table->double('amount', 8, 2);
+            $table->double('debit', 8, 2);
+            $table->double('credit', 8, 2);
             $table->text('statment')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
 
             $table->primary(['accountID', 'journalID']);
 

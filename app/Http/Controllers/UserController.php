@@ -137,7 +137,7 @@ class UserController extends Controller
             __('userMessages.logedout');
     }
 
-    public function singup(Request $request)
+    /*public function singup(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -156,5 +156,5 @@ class UserController extends Controller
         }
 
         return response()->json($user, 201);
-    }
+    }*/
 }
