@@ -22,9 +22,9 @@ class AccountController extends Controller
         $request->validate([
             'accountCode' => 'required',
             'name' => 'required',
-            'type' =>=> [
+            'type' => [
                 'required',
-                Rule::in(['PAYABLE','payable', 'RECEIVABLE', ' EXPENSE']),
+                Rule::in(['PAYABLE','payable', 'RECEIVABLE', 'receivable',' EXPENSE', 'expense']),
             ],
             'main' => 'required',
         ]);
