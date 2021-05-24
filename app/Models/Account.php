@@ -34,6 +34,16 @@ class Account extends Model
         return $this->hasMany(Account::class, 'parentID');
     }
 
+    public function baseAccount()
+    {
+        if ($this->parentID) {
+            if ($this->parentAccount->parentID) {
+                return $this->parentAccount->baseAccount();
+            }
+            return $this->parentAccount();
+        }
+    }
+
     public function journals()
     {
         return $this->BelongsToMany(

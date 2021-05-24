@@ -72,18 +72,40 @@ class AccountsJournalController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function delete($accountID, $journalID)
     {
-        //
-    }
+        $account = Account::find($accountID);
 
-    public function show($ID)
-    {
-        //
-    }
+        if (!$account) {
+            return parent::getResponse(
+                __('$accountMessages.NotFound'),
+                404
+            );
+        }
 
-    public function delete($ID)
-    {
-        //
+        if ($account->state != 'OPENED') {
+            return parent::getResponse(
+                __('$accountMessages.NotOpend'),
+                405
+            );
+        }
+
+        $journal = $account->journals()->where('id', $journalID)->first();
+
+        if (!$journal) {
+            return parent::getResponse(
+                __('journalMessages.notFound'),
+                404
+            );
+        }
+
+        $account->journals()->detach(
+            $journal->id
+        );
+
+        return parent::getResponse(
+            __('accountJournalMessages.deleted'),
+            200
+        );
     }
 }

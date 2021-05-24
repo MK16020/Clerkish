@@ -20,7 +20,14 @@ class VoucherController extends Controller
     {
         $request->validate([
             'number' => 'required',
-            'type' => 'required',
+            'type' => [
+                'required',
+                Rule::in(['DEBIT','debit', 'PAYMENT','payment']),
+                ],
+            'paymentType' => [
+                'required',
+                Rule::in(['CARD','card', 'CASH','cash','TRASPARE','transpare','CHECK','check']),
+                ],
             'date' => 'required',
             'amount' => 'required',
             'relatedPerson' => 'required',

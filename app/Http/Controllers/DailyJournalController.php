@@ -24,10 +24,7 @@ class DailyJournalController extends Controller
             'number' => 'required',
             'type' => [
                 'required',
-                Rule::in(['PURCHASE','purchase','SALES','sales','CASH RECEIPT',
-                'cash receipt','CASH PAYMENT','cash payment','CASH DISBURSEMENT',
-                 'cash dibursement','PURCHASE RETURN','purchase return','SALES RETURN',
-                 'sale return','GENERAL','general']),
+                Rule::in(['CREDIT','credit','DEBIT','debit','ADJUSTMENT','adjustment']),
                 ],
             'date' => 'required',
         ]);
